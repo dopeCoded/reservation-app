@@ -1,0 +1,27 @@
+<h1>My Reservations</h1>
+
+<% if @reservations.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Room</th>
+        <th>Check in</th>
+        <th>Check out</th>
+        <th>Guests</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.room.name %></td>
+          <td><%= reservation.check_in %></td>
+          <td><%= reservation.check_out %></td>
+          <td><%= reservation.guests %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have no reservations.</p>
+<% end %>
+<%= link_to 'Back', user_path(current_user) %>

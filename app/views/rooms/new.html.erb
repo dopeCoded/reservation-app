@@ -1,0 +1,24 @@
+<%= form_for(@room) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <%= f.submit "Create Room" %>
+<% end %>
+
+<% if @room.image.attached? %>
+  <%= image_tag(@room.image.variant(resize: "500x500")) %>
+<% end %>
+
+<%= link_to 'Back', user_path(current_user) %>

@@ -1,0 +1,14 @@
+<%= form_for(@reservation) do |f| %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.label :check_in %>
+  <%= f.date_field :check_in %>
+
+  <%= f.label :check_out %>
+  <%= f.date_field :check_out %>
+
+  <%= f.label :guests %>
+  <%= f.number_field :guests %>
+
+  <%= f.submit "Reserve" %>
+<% end %>
+  

@@ -1,0 +1,21 @@
+<h1>Edit Room</h1>
+
+<%= form_for(@room) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+
+    <%= f.submit "Update Room" %>
+<% end %>
+<%= link_to 'Back', user_path(@room.user) %>

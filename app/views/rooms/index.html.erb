@@ -1,0 +1,9 @@
+<% @rooms.each do |room| %>
+    <div>
+      <h2><%= link_to room.name, room %></h2>
+      <p><%= room.description %></p>
+      <p><%= room.price %>/day</p>
+      <p><%= room.created_at.to_date %></p>
+    </div>
+  <% end %>
+  

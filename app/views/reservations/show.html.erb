@@ -1,0 +1,21 @@
+<p>
+  <strong>Check-in:</strong>
+  <%= @reservation.check_in.strftime("%Y/%m/%d") %>
+</p>
+
+<p>
+  <strong>Check-out:</strong>
+  <%= @reservation.check_out.strftime("%Y/%m/%d") %>
+</p>
+
+<p>
+  <strong>Guests:</strong>
+  <%= @reservation.guests %>
+</p>
+
+<p>
+  <strong>Total Price:</strong>
+  <%= @reservation.room.price * (@reservation.check_out - @reservation.check_in).to_i %>
+</p>
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %>

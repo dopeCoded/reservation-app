@@ -1,0 +1,13 @@
+<h1>Your Reservations</h1>
+
+<% @reservations.each do |reservation| %>
+  <div>
+    <h2><%= link_to reservation.room.name, room_path(reservation.room) %></h2>
+    <p><%= reservation.room.description %></p>
+    <p>Total Price: <%= reservation.room.price * (reservation.check_out - reservation.check_in).to_i %></p>
+    <p>Check-in: <%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+    <p>Check-out: <%= reservation.check_out.strftime("%Y/%m/%d") %></p>
+    <p>Reservation Date: <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+    <%= image_tag reservation.room.image.variant(resize: "500x500"), default_url: "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" if reservation.room.image.attached? %>
+  </div>
+<% end %>
