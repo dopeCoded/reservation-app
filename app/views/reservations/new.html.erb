@@ -1,14 +1,26 @@
-<%= form_for(@reservation) do |f| %>
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.label :check_in %>
-  <%= f.date_field :check_in %>
+<div class="container">
+  <%= form_for(@reservation, html: { class: 'form-horizontal' }) do |f| %>
+    <div class="form-group">
+      <%= f.hidden_field :room_id, value: @room.id %>
+    </div>
 
-  <%= f.label :check_out %>
-  <%= f.date_field :check_out %>
+    <div class="form-group">
+      <%= f.label :check_in, class: 'control-label' %>
+      <%= f.date_field :check_in, class: 'form-control' %>
+    </div>
 
-  <%= f.label :guests %>
-  <%= f.number_field :guests %>
+    <div class="form-group">
+      <%= f.label :check_out, class: 'control-label' %>
+      <%= f.date_field :check_out, class: 'form-control' %>
+    </div>
 
-  <%= f.submit "Reserve" %>
-<% end %>
-  
+    <div class="form-group">
+      <%= f.label :guests, class: 'control-label' %>
+      <%= f.number_field :guests, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Reserve", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
