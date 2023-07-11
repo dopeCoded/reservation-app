@@ -13,7 +13,7 @@ class Reservation < ApplicationRecord
   end  
   validates :check_in, :check_out, :guests, presence: true
   validate :check_out_after_check_in
-  validates :guests, numericality: { greater_than_or_equal_to: 1 }
+  validates :guests, numericality: { greater_than_or_equal_to: 1, message: "At least one person" }
   
 
   def check_out_after_check_in
