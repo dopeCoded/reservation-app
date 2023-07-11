@@ -33,6 +33,17 @@ class RoomsController < ApplicationController
     end
   end
 
+  def search
+    if params[:search].blank? && params[:area].blank?
+      @rooms = Room.all
+    else
+      @rooms = Room.all
+      @rooms = @rooms.where('name LIKE ? OR description LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+      @rooms = @rooms.where('address LIKE ?', "%#{params[:area]}%") if params[:area].present?
+    end
+  end
+  
+
   private
 
   def set_room
@@ -40,6 +51,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name, :description, :price, :address, :image)
+    params.require(:room).permit(:name, :description, :price, :address, :image, :area)
   end
 end

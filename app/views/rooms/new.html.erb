@@ -23,6 +23,11 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :area %>
+          <%= f.select :area, ["Tokyo", "Osaka", "Kyoto", "Sapporo"], prompt: "Select an area" %>
+        </div>
+        
+        <div class="mb-3">
           <%= f.label :image, class: 'form-label' %>
           <%= f.file_field :image, class: 'form-control' %>
         </div>
@@ -40,5 +45,5 @@
 <% end %>
 
 <div class="mt-3">
-  <%= link_to 'Back', user_path(current_user), class: 'btn btn-secondary' %>
+  <%= link_to 'Back', @user, class: 'btn btn-secondary' %>
 </div>

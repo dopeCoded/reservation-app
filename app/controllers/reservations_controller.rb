@@ -3,7 +3,11 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def index
-    @reservations = current_user.reservations
+    if user_signed_in?
+      @reservations = current_user.reservations
+    else
+      redirect_to new_user_session_path, notice: 'You need to sign in or sign up before continuing.'
+    end
   end  
       
   def show

@@ -4,7 +4,7 @@
   <div>
     <h2><%= link_to reservation.room.name, room_path(reservation.room) %></h2>
     <p><%= reservation.room.description %></p>
-    <p>Total Price: <%= reservation.room.price * (reservation.check_out - reservation.check_in).to_i %></p>
+    <p>Total Price/Day: <%= reservation.room.price * (reservation.check_out - reservation.check_in).to_i %></p>
     <p>Check-in: <%= reservation.check_in.strftime("%Y/%m/%d") %></p>
     <p>Check-out: <%= reservation.check_out.strftime("%Y/%m/%d") %></p>
     <p>Reservation Date: <%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></p>

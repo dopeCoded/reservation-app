@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:edit_account, :edit_profile, :update]
+  before_action :set_user, only: [:show, :edit_account, :edit_profile, :update]
 
   def index
     @reservations = current_user.reservations
   end
     
-  
   def show
   end
   
@@ -23,7 +22,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
+  def edit_account
+  end
+
+  def edit_profile
   end
   
   def update
@@ -48,4 +50,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar).delete_if { |_, v| v.blank? }
   end
 end
-  

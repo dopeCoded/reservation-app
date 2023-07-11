@@ -1,21 +1,35 @@
-<p>
-  <strong>Check-in:</strong>
-  <%= @reservation.check_in.strftime("%Y/%m/%d") %>
-</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Reservation Details</h5>
+          <p class="card-text">
+            <strong>Check in:</strong>
+            <%= @reservation.check_in %>
+          </p>
 
-<p>
-  <strong>Check-out:</strong>
-  <%= @reservation.check_out.strftime("%Y/%m/%d") %>
-</p>
+          <p class="card-text">
+            <strong>Check out:</strong>
+            <%= @reservation.check_out %>
+          </p>
 
-<p>
-  <strong>Guests:</strong>
-  <%= @reservation.guests %>
-</p>
+          <p class="card-text">
+            <strong>Number of nights:</strong>
+            <%= ((@reservation.check_out - @reservation.check_in) / 86400).to_i %>
+          </p>
 
-<p>
-  <strong>Total Price:</strong>
-  <%= @reservation.room.price * (@reservation.check_out - @reservation.check_in).to_i %>
-</p>
+          <p class="card-text">
+            <strong>Number of guests:</strong>
+            <%= @reservation.guests %>
+          </p>
 
-<%= link_to 'Edit', edit_reservation_path(@reservation) %>
+          <p class="card-text">
+            <strong>Total cost:</strong>
+            <%= @reservation.total_cost %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
