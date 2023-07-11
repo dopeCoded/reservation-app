@@ -13,6 +13,8 @@ class Reservation < ApplicationRecord
   end  
   validates :check_in, :check_out, :guests, presence: true
   validate :check_out_after_check_in
+  validates :guests, numericality: { greater_than_or_equal_to: 1 }
+  
 
   def check_out_after_check_in
     return if check_out.blank? || check_in.blank?

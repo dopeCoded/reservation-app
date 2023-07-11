@@ -6,4 +6,5 @@ class Room < ApplicationRecord
   validates :price, presence: true
   validates :address, presence: true
   validates :area, presence: true, inclusion: { in: ["Tokyo", "Osaka", "Kyoto", "Sapporo"] }
+  validates :price, numericality: { greater_than_or_equal_to: 1 }
 end

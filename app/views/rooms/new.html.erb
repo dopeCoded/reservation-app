@@ -36,7 +36,7 @@
       <% end %>
 
       <div class="mt-3">
-        <img id="image-preview" src="#" alt="Image preview" style="display: none; width: 100%;" />
+        <img id="img" accept="image/*" src="https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" style="display: none;">
       </div>
     </div>
   </div>
@@ -52,20 +52,22 @@
   <%= link_to 'Back', @user, class: 'btn btn-secondary' %>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector('#room_image').addEventListener('change', function(e) {
-      var file = e.target.files[0];
+$(document).on('turbolinks:load', function() {
+  $('#room_image').on('change', function (e) {
       var reader = new FileReader();
-
-      reader.onload = (function(file) {
-        return function(e) {
-          document.querySelector('#image-preview').src = e.target.result;
-          document.querySelector('#image-preview').style.display = 'block';
-        };
-      })(file);
-
-      reader.readAsDataURL(file);
-    });
+      reader.onload = function (e) {
+          $("#img").attr('src', e.target.result);
+          $("#img").css('display', '');
+      }
+      reader.readAsDataURL(e.target.files[0]);
   });
+
+  // 削除ボタンクリック時にフォームとプレビューを初期化
+  $('#delete').on('click', function (e) {
+    $("#img").attr('src', '');
+    $("#form").val('');
+  });
+});
 </script>

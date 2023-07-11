@@ -24,7 +24,8 @@
 
     <div class="form-group">
       <%= f.label :image %>
-      <%= f.file_field :image, class: 'form-control-file' %>
+      <%= f.file_field :image, class: 'form-control-file', id: 'room_image' %>
+      <img id="img" accept="image/*" src="https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" style="display: none;">
     </div>
 
     <%= f.submit "Update Room", class: 'btn btn-primary' %>
@@ -32,3 +33,23 @@
 
   <%= link_to 'Back', user_path(@room.user), class: 'btn btn-secondary mt-3' %>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+$(document).on('turbolinks:load', function() {
+  $('#room_image').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $("#img").attr('src', e.target.result);
+          $("#img").css('display', '');
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  });
+
+  // 削除ボタンクリック時にフォームとプレビューを初期化
+  $('#delete').on('click', function (e) {
+    $("#img").attr('src', '');
+    $("#form").val('');
+  });
+});
+</script>
