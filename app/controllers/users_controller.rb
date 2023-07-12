@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit_account, :edit_profile, :update]
-  before_action :set_user, only: [:show, :edit_account, :edit_profile, :update]
+  before_action :set_user, only: [:show, :update]
 
   def index
     @reservations = current_user.reservations
@@ -23,9 +23,12 @@ class UsersController < ApplicationController
   end
 
   def edit_account
+    @user = current_user
   end
+  
 
   def edit_profile
+    @user = current_user
   end
   
   def update

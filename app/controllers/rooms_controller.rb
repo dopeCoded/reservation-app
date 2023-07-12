@@ -2,7 +2,9 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update]
 
   def index
-    @rooms = Room.all
+    def index
+      @rooms = Room.search(params[:query]).in_area(params[:area])
+    end    
   end
 
   def show
@@ -33,21 +35,11 @@ class RoomsController < ApplicationController
     end
   end
 
-  def search
-    if params[:search].blank? && params[:area].blank?
-      @rooms = Room.all
-    else
-      @rooms = Room.all
-      @rooms = @rooms.where('name LIKE ? OR description LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
-      @rooms = @rooms.where('address LIKE ?', "%#{params[:area]}%") if params[:area].present?
-    end
-  end
-  
-
   private
 
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
+    redirect_to(rooms_path, alert: "Room not found.") unless @room
   end
 
   def room_params
