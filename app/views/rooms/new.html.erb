@@ -61,11 +61,5 @@ $(document).on('turbolinks:load', function() {
       }
       reader.readAsDataURL(e.target.files[0]);
   });
-
-  // 削除ボタンクリック時にフォームとプレビューを初期化
-  $('#delete').on('click', function (e) {
-    $("#img").attr('src', '');
-    $("#form").val('');
-  });
 });
 </script>

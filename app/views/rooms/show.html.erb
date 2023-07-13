@@ -1,22 +1,10 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-9">
       <h2><strong>Name:</strong> <%= @room.name %></h2>
       <p><strong>Description:</strong> <%= @room.description %></p>
       <p><strong>Price/Day:</strong> <%= @room.price %></p>
       <p><strong>Address:</strong> <%= @room.address %></p>
-    </div>
-    <div class="col-md-6">
-      <p><strong>Image:</strong></p>
-      <% begin %>
-        <% if @room.image.attached? %>
-          <%= image_tag(@room.image.variant(resize: "500x500"), class: "img-fluid") %>
-        <% else %>
-          <%= image_tag("https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png", size: "500x500", class: "img-fluid") %>
-        <% end %>
-      <% rescue => e %>
-        <p class="alert alert-warning">画像を表示できませんでした。エラー: <%= e.message %></p>
-      <% end %>
     </div>
   </div>
     <div class="row mt-3">
