@@ -1,0 +1,29 @@
+<div class="container">
+  <%= form_for(@reservation, html: { class: 'form-horizontal' }) do |f| %>
+    <div class="form-group">
+      <%= f.hidden_field :room_id, value: @room.id %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :check_in, class: 'control-label' %>
+      <%= f.date_field :check_in, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :check_out, class: 'control-label' %>
+      <%= f.date_field :check_out, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :guests %>
+      <%= f.number_field :guests, class: 'form-control', required: true, min: 1, oninput: "validity.valid||(value='');" %>
+      <div class="invalid-feedback">
+        Number of guests must be a positive number.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Reserve", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

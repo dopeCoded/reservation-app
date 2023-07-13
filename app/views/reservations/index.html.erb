@@ -1,0 +1,37 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Room Name</th>
+      <th>Description</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Nights</th>
+      <th>Guests</th>
+      <th>Total Cost</th>
+      <th>Confirmed At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td>
+          <% if reservation.room.image.attached? %>
+            <%= image_tag(reservation.room.image.variant(resize: "100x100"), class: "img-fluid") %>
+          <% else %>
+            <%= image_tag("https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png", size: "100x100", class: "img-fluid") %>
+          <% end %>
+        </td>
+        <td><%= reservation.room.name %></td>
+        <td><%= reservation.room.description %></td>
+        <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
+        <td><%= ((reservation.check_out - reservation.check_in) / 86400).to_i %></td>
+        <td><%= reservation.guests %></td>
+        <td><%= reservation.total_cost %></td>
+        <td><%= reservation.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

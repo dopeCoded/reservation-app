@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_for @user, url: user_path(@user), html: { multipart: true } do |f| %>
+        <div class="form-group">
+          <%= f.label :avatar %>
+          <%= f.file_field :avatar, class: 'form-control', id: 'user_avatar' %>
+          <img id="img" accept="image/*" src="https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" style="display: none;">
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :introduction %>
+          <%= f.text_area :introduction, class: 'form-control' %>
+        </div>
+
+        <%= f.submit 'Update Profile', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+$(document).on('turbolinks:load', function() {
+  $('#user_avatar').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $("#img").attr('src', e.target.result);
+          $("#img").css('display', '');
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  });
+
+  // 削除ボタンクリック時にフォームとプレビューを初期化
+  $('#delete').on('click', function (e) {
+    $("#img").attr('src', '');
+    $("#form").val('');
+  });
+});
+</script>

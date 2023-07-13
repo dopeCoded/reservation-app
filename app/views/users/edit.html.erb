@@ -1,0 +1,67 @@
+<div class="container">
+  <h1 class="my-4">Edit User</h1>
+
+  <%= form_with(model: @user, local: true, html: { class: 'needs-validation', novalidate: true }) do |form| %>
+    <% if @user.errors.any? %>
+      <div class="alert alert-danger" role: "alert">
+        <h4 class="alert-heading"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :avatar %>
+      <%= form.file_field :avatar, class: 'form-control-file', id: 'user_avatar' %>
+    </div>
+
+    <div class="form-group">
+      <img id="avatar-preview" src="#" alt="Avatar preview" style="display: none; width: 100%;" />
+    </div>
+
+    <%= form.submit 'Update', class: 'btn btn-primary' %>
+  <% end %>
+
+  <%= link_to 'Back', @user, class: 'btn btn-secondary mt-3' %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('#user_avatar').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = (function(file) {
+        return function(e) {
+          document.querySelector('#avatar-preview').src = e.target.result;
+          document.querySelector('#avatar-preview').style.display = 'block';
+        };
+      })(file);
+
+      reader.readAsDataURL(file);
+    });
+  });
+</script>
