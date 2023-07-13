@@ -10,6 +10,7 @@ class Reservation < ApplicationRecord
 
   validate :check_in_date_cannot_be_in_the_past
   validate :check_out_after_check_in
+  validate :stay_at_least_one_night
 
   validates :guests, numericality: { greater_than_or_equal_to: 1, message: "At least one person" }
 
@@ -20,7 +21,7 @@ class Reservation < ApplicationRecord
   private
 
   def check_in_date_cannot_be_in_the_past
-    if check_in.present? && check_in < Date.today
+    if check_in.present? && check_in < DateTime.now.end_of_day
       errors.add(:check_in, "can't be in the past")
     end
   end
@@ -31,5 +32,13 @@ class Reservation < ApplicationRecord
     if check_out < check_in
       errors.add(:check_out, "must be after the check in date")
     end
+  end
+
+  def stay_at_least_one_night
+    if check_out == check_in
+      errors.add(:check_out, "You should stay at least one night")
+    end
+
+    return if check_out.blank? || check_in.blank?
   end
 end
