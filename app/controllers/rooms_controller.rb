@@ -2,9 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update]
 
   def index
-    def index
-      @rooms = Room.search(params[:query]).in_area(params[:area])
-    end    
+    @rooms = Room.search(params[:search]).search_by_area(params[:area])
   end
 
   def show
@@ -43,6 +41,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:name, :description, :price, :address, :image, :area)
+    params.require(:room).permit(:name, :description, :price, :address, :image)
   end
 end

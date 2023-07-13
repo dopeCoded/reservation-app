@@ -22,6 +22,29 @@
     .RecommendArea--sapporo {
       background-image: url(https://rails-02-sample.herokuapp.com//assets/home/recommend-area/sapporo.jpg);
     }
+    .RecommendAreas {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .RecommendArea {
+      flex: 1 0 21%;  /* 4つの画像が横並びになるように調整 */
+      margin: 1%;  /* 画像間のスペースを作る */
+      background-size: cover;
+      background-position: 50%;
+      border-radius: 26px;
+      display: flex;
+      flex-direction: column;
+      height: 455px;
+      justify-content: flex-end;
+      padding: 40px 24px;
+    }
+    
+    .RecommendArea img {
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -30,20 +53,18 @@
   <div class="container">
     <%= form_with(url: rooms_path, method: :get, local: true) do %>
       <%= text_field_tag :query, params[:query] %>
-      <%= submit_tag "Search", name: nil %>
+      <%= submit_tag "Search by accomodation name", name: nil %>
     <% end %>
 
     <h2 class="RecommendAreaSection__title">
       おすすめのエリア
     </h2>
 
-    <%= form_with url: rooms_path, method: :get do |form| %>
-      <% ["Tokyo", "Osaka", "Kyoto", "Sapporo"].each do |area| %>
-        <%= form.radio_button :area, area %>
-        <%= form.label :area, area %>
-      <% end %>
-      <%= form.submit "Search by area" %>
-    <% end %>
+    <%= form_with(url: rooms_path, method: :get, local: true) do |form| %>
+      <%= form.label :area, '' %>
+      <%= form.text_field :area %>
+      <%= form.submit 'Search by address' %>
+    <% end %>    
   </div>
 
   <footer class="footer mt-auto py-3 bg-light">
@@ -57,5 +78,23 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <div class="RecommendAreas">
+    <a class="RecommendArea RecommendArea--tokyo" href="/rooms?area=東京">
+      <img alt="Tokyo">
+      <span class="RecommendArea__name RecommendArea__name--en">Tokyo</span>
+    </a>
+    <a class="RecommendArea RecommendArea--osaka" href="/rooms?area=大阪">
+      <img alt="Osaka">
+      <span class="RecommendArea__name RecommendArea__name--en">Osaka</span>
+    </a>
+    <a class="RecommendArea RecommendArea--kyoto" href="/rooms?area=京都">
+      <img alt="Kyoto">
+      <span class="RecommendArea__name RecommendArea__name--en">Kyoto</span>
+    </a>
+    <a class="RecommendArea RecommendArea--sapporo" href="/rooms?area=札幌">
+      <img alt="Sapporo">
+      <span class="RecommendArea__name RecommendArea__name--en">Sapporo</span>
+    </a>
+  </div>
 </body>
 </html>
